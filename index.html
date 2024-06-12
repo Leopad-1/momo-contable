@@ -49,90 +49,21 @@
             </form>
             <div id="factura-resumen"></div>
         </main>
-        <script>
-            // Abre (o crea) la base de datos
-            function openDatabase() {
-                return new Promise((resolve, reject) => {
-                    const request = indexedDB.open("miBaseDeDatos", 1);
+        <!-- -->
+
+
+        <!-- -->
+
+        <h1>Web Persistente</h1>
+        <textarea id="content" rows="10" cols="30"></textarea>
+        <button id="saveButton">Guardar Cambios</button>
     
-                    request.onerror = (event) => {
-                        console.error("Error abriendo la base de datos:", event.target.errorCode);
-                        reject(event.target.errorCode);
-                    };
-    
-                    request.onsuccess = (event) => {
-                        console.log("Base de datos abierta con éxito");
-                        resolve(event.target.result);
-                    };
-    
-                    request.onupgradeneeded = (event) => {
-                        const db = event.target.result;
-                        if (!db.objectStoreNames.contains("miObjectStore")) {
-                            db.createObjectStore("miObjectStore", { keyPath: "id" });
-                        }
-                    };
-                });
-            }
-    
-            // Guarda o actualiza datos en la base de datos
-            function saveData(db, data) {
-                return new Promise((resolve, reject) => {
-                    const transaction = db.transaction(["miObjectStore"], "readwrite");
-                    const objectStore = transaction.objectStore("miObjectStore");
-    
-                    const request = objectStore.put(data);
-                    request.onsuccess = () => {
-                        console.log("Datos guardados/actualizados con éxito");
-                        resolve();
-                    };
-    
-                    request.onerror = (event) => {
-                        console.error("Error guardando los datos:", event.target.errorCode);
-                        reject(event.target.errorCode);
-                    };
-                });
-            }
-    
-            // Lee los datos desde la base de datos
-            function readData(db) {
-                return new Promise((resolve, reject) => {
-                    const transaction = db.transaction(["miObjectStore"], "readonly");
-                    const objectStore = transaction.objectStore("miObjectStore");
-    
-                    const request = objectStore.get(1);
-                    request.onsuccess = (event) => {
-                        console.log("Datos leídos con éxito:", event.target.result);
-                        resolve(event.target.result);
-                    };
-    
-                    request.onerror = (event) => {
-                        console.error("Error leyendo los datos:", event.target.errorCode);
-                        reject(event.target.errorCode);
-                    };
-                });
-            }
-    
-            // Función principal que maneja el flujo de datos
-            async function main() {
-                const db = await openDatabase();
-    
-                // Intenta leer los datos existentes
-                let data = await readData(db);
-                if (!data) {
-                    data = { id: 1, value: "Datos iniciales" };
-                    await saveData(db, data);
-                }
-    
-                // Actualiza los datos cada 5 segundos
-                setInterval(async () => {
-                    data.value = `Datos actualizados: ${new Date().toLocaleTimeString()}`;
-                    await saveData(db, data);
-                }, 5000);
-            }
-    
-            // Inicia el proceso al cargar la página
-            window.onload = main;
-        </script>
+        <!-- -->
+
+
+
+
+
         <footer>
             <p>&copy; momo contable 2024</p>
         </footer>

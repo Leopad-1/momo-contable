@@ -34,3 +34,27 @@ document.addEventListener("DOMContentLoaded", function() {
         resumenDiv.innerHTML = resumenHTML;
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.getElementById('content');
+    const saveButton = document.getElementById('saveButton');
+
+    // Cargar el contenido guardado desde localStorage
+    const savedContent = localStorage.getItem('content');
+    if (savedContent) {
+        textarea.value = savedContent;
+    }
+
+    // Guardar el contenido en localStorage cuando se hace clic en el botón
+    saveButton.addEventListener('click', function() {
+        const content = textarea.value;
+        localStorage.setItem('content', content);
+        alert('Cambios guardados');
+    });
+
+    // Guardar el contenido automáticamente cada vez que se cambia
+    textarea.addEventListener('input', function() {
+        localStorage.setItem('content', textarea.value);
+    });
+});
