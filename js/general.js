@@ -35,26 +35,35 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// script.js
 
+// Guardar datos en localStorage
+document.getElementById('saveButton').addEventListener('click', function() {
+    const nombre = document.getElementById('nombre').value;
+    const direccion = document.getElementById('direccion').value;
+    const telefono = document.getElementById('telefono').value;
+    const producto = document.getElementById('producto').value;
+    const cantidad = document.getElementById('cantidad').value;
+    const precio = document.getElementById('precio').value;
+
+    localStorage.setItem('nombre', nombre);
+    localStorage.setItem('direccion', direccion);
+    localStorage.setItem('telefono', telefono);
+    localStorage.setItem('producto', producto);
+    localStorage.setItem('cantidad', cantidad);
+    localStorage.setItem('precio', precio);
+
+    alert('Datos guardados correctamente');
+});
+
+// Recuperar datos de localStorage al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
-    const textarea = document.getElementById('content');
-    const saveButton = document.getElementById('saveButton');
-
-    // Cargar el contenido guardado desde localStorage
-    const savedContent = localStorage.getItem('content');
-    if (savedContent) {
-        textarea.value = savedContent;
+    if (localStorage.getItem('nombre')) {
+        document.getElementById('nombre').value = localStorage.getItem('nombre');
+        document.getElementById('direccion').value = localStorage.getItem('direccion');
+        document.getElementById('telefono').value = localStorage.getItem('telefono');
+        document.getElementById('producto').value = localStorage.getItem('producto');
+        document.getElementById('cantidad').value = localStorage.getItem('cantidad');
+        document.getElementById('precio').value = localStorage.getItem('precio');
     }
-
-    // Guardar el contenido en localStorage cuando se hace clic en el botón
-    saveButton.addEventListener('click', function() {
-        const content = textarea.value;
-        localStorage.setItem('content', content);
-        alert('Cambios guardados');
-    });
-
-    // Guardar el contenido automáticamente cada vez que se cambia
-    textarea.addEventListener('input', function() {
-        localStorage.setItem('content', textarea.value);
-    });
 });
