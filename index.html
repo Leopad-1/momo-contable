@@ -9,8 +9,27 @@
     <title>momo contable</title>
 </head>
 
-<body class="no-scroll">
+<body class="no-scroll" contenteditable="true">
+    <h1>Contenido Editable</h1>
+    <p>Este contenido se guardará en local storage cada 10 segundos.</p>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Recuperar el contenido del localStorage al cargar la página
+            if (localStorage.getItem('bodyContent')) {
+                document.body.innerHTML = localStorage.getItem('bodyContent');
+            }
+
+            // Función para guardar el contenido del body en el localStorage
+            function saveContent() {
+                localStorage.setItem('bodyContent', document.body.innerHTML);
+                console.log('Contenido guardado en localStorage');
+            }
+
+            // Guardar el contenido cada 10 segundos
+            setInterval(saveContent, 10000);
+        });
+    </script>
     <!-- -->
     <!-- -->
     <div class="centrado" id="onload">
