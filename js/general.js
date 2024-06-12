@@ -45,6 +45,7 @@ document.getElementById('saveButton').addEventListener('click', function() {
     const producto = document.getElementById('producto').value;
     const cantidad = document.getElementById('cantidad').value;
     const precio = document.getElementById('precio').value;
+    const factura = document.getElementById('factura').value;
 
     localStorage.setItem('nombre', nombre);
     localStorage.setItem('direccion', direccion);
@@ -52,7 +53,8 @@ document.getElementById('saveButton').addEventListener('click', function() {
     localStorage.setItem('producto', producto);
     localStorage.setItem('cantidad', cantidad);
     localStorage.setItem('precio', precio);
-
+    localStorage.setItem('cantidad', cantidad);
+    localStorage.setItem('factura', factura);
     alert('Datos guardados correctamente');
 });
 
@@ -65,5 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('producto').value = localStorage.getItem('producto');
         document.getElementById('cantidad').value = localStorage.getItem('cantidad');
         document.getElementById('precio').value = localStorage.getItem('precio');
+        document.getElementById('factura').value = localStorage.getItem('factura')
     }
 });
